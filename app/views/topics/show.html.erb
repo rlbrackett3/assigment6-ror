@@ -1,0 +1,40 @@
+<h1>View topic</h1>
+
+<p>
+	<strong>Title:</strong>
+	<%= @topic.title %>
+</p>
+
+<p>
+	<strong>Body:</strong>
+	<%= @topic.body %>
+</p>
+
+<p>
+	<strong>User:</strong>
+	<%= @topic.user_id %>
+</p>
+
+<p>
+	Posted <%= distance_of_time_in_words(Time.now, @topic.created_at) %> ago.
+</p>
+
+<h2>Replies</h2>
+
+<% @topic.replies.each do |reply| %>
+	<p>
+		<%= reply.text %>
+	</p>
+<% end %>
+
+<h2>Reply to this topic</h2>
+	<%= form_for(:reply) do |f| %>
+		<div class="field">
+			<%= f.label :text %><br>
+			<%= f.text_field :text %>
+		</div>
+
+		<div class="actions">
+			<%= f.submit %>
+		</div>
+	<% end %>
