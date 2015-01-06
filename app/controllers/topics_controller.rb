@@ -1,7 +1,13 @@
 class TopicsController < ApplicationController
 
 	def index
-		@topics = Topic.all
+		@topics = Topic.all # this will list all topics, to list justa  users topics...
+		
+		# if params[:user_id]
+		# 	@topics = Topic.where(user_id: params[:user_id])
+		# else
+		# 	@topics = Topic.all
+		# end
 	end
 
 	def show
@@ -10,15 +16,19 @@ class TopicsController < ApplicationController
 
 	def new
 		@user = User.find(params[:user_id])
-		@topic = Topic.new
+		@topic = Topic.new # @topic = @user.topics.new
+		# note: this only works with the nested resources, so you may want to limit access to topics 
+		# in your routes file, or make a conditional here that checks for a current user.
 	end
 
 	def edit
 	end
 
 	def create
-		#@user = User.find(params[:user_id])
-		@topic = Topic.new(topic_params)
+		# @user = User.find(params[:user_id]) #uncomment this
+		@topic = Topic.new(topic_params) # @topic = @user.topics.new
+		# note: this only works with the nested resources, so you may want to limit access to topics 
+		# in your routes file, or make a conditional here that checks for a current user.
 		if @topic.save
 			flash[:notice] = "Topic saved successfully!"
 			redirect_to topics_path
