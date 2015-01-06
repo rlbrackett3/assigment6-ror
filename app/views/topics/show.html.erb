@@ -28,7 +28,8 @@
 <% end %>
 
 <h2>Reply to this topic</h2>
-	<%= form_for(:reply) do |f| %>
+	<!-- this is having an error because it is not posting to the correct route -->
+	<%= form_for([@user, @topic, @reply]) do |f| %>
 		<div class="field">
 			<%= f.label :text %><br>
 			<%= f.text_field :text %>
